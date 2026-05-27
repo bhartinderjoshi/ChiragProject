@@ -24,6 +24,12 @@ app.get("/health", (req, res) => {
   res.json({ status: "Server is running" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+// Export for Vercel serverless
+export default app;
+
+// Local development
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+  });
+}
